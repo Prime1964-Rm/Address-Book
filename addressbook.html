@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <link href="address-style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+             crossorigin="anonymous">
+    <link href="address-style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Monda&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Monda:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+    <body>
+        <div class="container mt-5 pr-5 pl-5 ">
+        <h1 style="color: #7e57c2;" class="h-6  text-center pt-3 mb-4"><i class="fa fa-address-book mr-3" aria-hidden="true"></i>Address Book</h1>
+        <div class="search-box-container mb-3">
+        <div class="findbtn"><i class="fa fa-search " aria-hidden="true"></i></div>
+        <input class="findbox" type="text" placeholder="Find Contact">
+        <div class="view">
+            <span class="list-view disabled ml-3"><i class="fa fa-list" aria-hidden="true"></i>
+                List-View</span>
+            <span class="tile-view ml-2"><i class="fa fa-address-card" aria-hidden="true"></i>
+            Tile-View</span>        
+        </div>
+        
+        </div>
+        <!-- <div class="card  mb-3 "> -->
+            <div class="tiles">
+                
+            </div>
+        <!-- </div> -->
+        <button class="addnew btn btn-primary mt-5 mb-5"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Add New Contact</button>
+        <div id="err" class="error hidden alert alert-danger">
+            <strong><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                Error </strong><span id="error"></span>
+        </div>
+        <div class="validated hidden border-success alert alert-success" >
+            <strong>
+                <i class="fa fa-check-circle text-success" aria-hidden="true"></i>
+                Validation Successful </strong>
+        </div>
+        <form  class="contact-form hidden">
+            <div class="name"><input id="FirstName" type="text" class="mb-3" placeholder="FirstName" required><input id="LastName" type="text" class="mb-3" placeholder="Last Name" required></div>
+            <div class="mb-3 contactno">
+            <input id="CountryCode" type="number" class="mb-3" placeholder="CountryCode" required>
+            <input id="Mobile" type="number" class="mb-3" placeholder="Mobile Number" required>
+            </div>
+            <select class="mb-3" id="ContactType">
+                <option >Home</option>
+                <option>Office</option>
+                <option selected>Personal</option>
+            </select>
+            <input class="dob mb-3" type="date" id="birthday" name="birthday">
+            <input id="Email" type="email" class="mb-3" placeholder="Email" required>
+            <button id='save' class="save btn btn-success" >Save</button>
+        </form>
+    </div>
+        <script src='script.js'></script>
+        <script src="view.js"></script>
+        <script src='contactList.js'></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+    </body>
+</html>
