@@ -115,9 +115,6 @@ document.querySelector('.tile-view').addEventListener('click',()=>{
     clicked=0
     document.querySelector('.list-view').classList.remove('selected')
 
-
-
-
     let stringContact = localStorage.getItem('contact')
     let contacts = JSON.parse(stringContact)
     if(clicked===0){
@@ -232,3 +229,28 @@ document.querySelector(".addnew").addEventListener("click",()=>{
     document.querySelector(".addnew").classList.add("hidden")
     document.querySelector(".contact-form").classList.remove("hidden")
 })
+
+
+//Find Contacts Functionality
+
+
+let filterInput = document.getElementById('findcontact');
+filterInput.addEventListener('keyup', filterData);
+
+function filterData(){
+    document.querySelector('.tiles').innerHTML=''
+    let filterValue= document.getElementById('findcontact').value.toLowerCase();
+    console.log(filterValue)
+    let stringData=localStorage.getItem('contact')
+    let data= JSON.parse(stringData)
+    let FilteredList;
+    if(filterValue){
+    FilteredList= data.filter(dataItem=>{
+       return (dataItem.FirstName.toLowerCase()+dataItem.LastName.toLowerCase()).includes(filterValue)
+    })}
+    else{
+        return ;
+    }
+    console.log(FilteredList)
+     
+}
