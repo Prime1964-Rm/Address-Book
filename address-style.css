@@ -44,10 +44,24 @@ body{
 
 .search-box-container{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
 }
+
+.contactFinder{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* @media screen and (min-width: 500px) {
+    .search-box-container{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: yellow;
+    } */
 
 .findbox{
     height: 33px;
@@ -67,7 +81,7 @@ body{
 
 .active{
     padding: 5px;
-    width: 50%;
+    width: 55%;
     padding-left: 20px;
     
 }
@@ -201,8 +215,9 @@ body{
     margin-bottom: 8px;
     display: flex;
     box-shadow: 2px 2px 4px rgb(182, 174, 233);
-
 }
+
+
 
 .list:hover{
     width: 104%;
@@ -334,6 +349,58 @@ body{
     border-bottom: 1px solid rgb(160, 155, 155);
 }
 
+@media only screen and (max-width: 800px) {
+    .tile{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        
+    }
+
+    .contactname{
+        display: flex;
+        
+        width: 100%;
+    }
+
+    .tile-contactname{
+        width: max-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .tile-right-container{
+        width: 100%;
+        height: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+    }   
+    .tile-left-container{
+        width: 100%;
+        height: 70%;
+        margin-right: 50%;
+        
+    }
+    .tile-connect-wrap{
+        margin-bottom: -20%;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 80%;
+    }
+    .tile-mod{
+        
+        margin-left: 80%;
+    }
+    }
+
 .tile:hover{
     width: 102%;
     margin-bottom: 5px;
@@ -423,4 +490,37 @@ body{
     color: rgb(245, 49, 49);
     margin-left:  5px;
     cursor: pointer;
+}
+
+.sort{
+    cursor: pointer;
+    height: 40px;
+}
+
+.view{
+    margin-bottom: 20px;
+}
+
+#deleteInput{
+    outline: none;
+    border:1px solid rgb(160, 155, 155);
+    border-radius: 15px;
+    font-size: .8rem;
+    padding: 5px;
+}
+
+.delContainer{
+    margin-top: 20px;
+}
+
+.delContainer button{
+    cursor: pointer;
+    border-radius: 8px;
+    background-color: rgb(241, 52, 93);
+    color: rgb(249, 253, 255);
+    border: 1px solid rgb(156, 38, 38);
+}
+
+.delContainer button:active{
+
 }

@@ -25,3 +25,23 @@ document.querySelector(".findbtn").addEventListener("click",function(){
 // }
 // let stringData=localStorage.getItem('contact')
 // let data= JSON.parse(stringData)
+
+
+
+
+// let stringContact = localStorage.getItem('contact')
+// let contacts = JSON.parse(stringContact)
+// let month= (contacts[0].birthday).slice(5)
+// console.log=(month) 
+
+
+
+
+
+
+
+
+
+
+
+

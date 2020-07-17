@@ -6,31 +6,20 @@
 // })
 let clicked = 0;
 let tileClicked =0;
+let view;
 //Card View
-document.querySelector(".list-view").addEventListener("click",()=>{
-
-    let parentList = document.querySelector('.tiles')
-    let childrenList = parentList.children
-    console.log(childrenList.length)
-    if(childrenList.length>0){
-        n= childrenList.length
-        for(let i = 0; i<n; i++){
-        let parent = document.querySelector('.tiles')
-        let child = document.querySelector('.tile')
-        parent.removeChild(child)
-        }
-    }
-    tileClicked=0
-    document.querySelector('.tile-view').classList.remove('selected')
 
 
-    let stringContact = localStorage.getItem('contact')
-    let contacts = JSON.parse(stringContact)
-    if(clicked===0){
-    contacts.map((contact)=>{
+    
+//function for ListView
+function printInListView(contacts){
+    contacts.map((contact, i)=>{
         //Tile
+
         var tile = document.createElement('div')
         tile.className="list";
+        tile.id=i;
+        console.log(tile.id)
         //Left
         let leftContainer= document.createElement('div');
         leftContainer.className='left-container'
@@ -85,39 +74,14 @@ document.querySelector(".list-view").addEventListener("click",()=>{
         tile.append(leftContainer,rightContainer)
         document.querySelector('.tiles').append(tile);
 
-    })
-    clicked++
-    document.querySelector('.list-view').classList.add('selected')
-}else{
-    return false;
+
+        //delete listener
+        document.querySelector('.list-view').classList.add('selected')
+  })
 }
-    document.querySelector('.contact-form').classList.add('hidden')
-    document.querySelector('.tiles').classList.remove('hidden')
-    document.querySelector(".addnew").classList.remove("hidden")
 
-})
-
-// Tile View
-
-document.querySelector('.tile-view').addEventListener('click',()=>{
-
-    let parentList = document.querySelector('.tiles')
-    let childrenList = parentList.children
-    console.log(childrenList.length)
-    if(childrenList.length>0){
-        n= childrenList.length
-        for(let i = 0; i<n; i++){
-        let parent = document.querySelector('.tiles')
-        let child = document.querySelector('.list')
-        parent.removeChild(child)
-        }
-    }
-    clicked=0
-    document.querySelector('.list-view').classList.remove('selected')
-
-    let stringContact = localStorage.getItem('contact')
-    let contacts = JSON.parse(stringContact)
-    if(clicked===0){
+//function for TileView
+function printInTileView(contacts){
     contacts.map((contact)=>{
         //Tile
         var tile = document.createElement('div')
@@ -169,6 +133,7 @@ document.querySelector('.tile-view').addEventListener('click',()=>{
         let deleteContact= document.createElement('div')
         deleteContact.className="tile-delete-contact"
         deleteContact.innerHTML='Delete'
+
         //adding to mod
         mod.append(editContact,deleteContact)
         //Add to Right container
@@ -177,6 +142,75 @@ document.querySelector('.tile-view').addEventListener('click',()=>{
         document.querySelector('.tiles').append(tile);
 
     })
+}
+
+
+    document.querySelector(".list-view").addEventListener("click",()=>{
+        document.querySelector('.tiles').innerHTML=''
+
+    // let parentList = document.querySelector('.tiles')
+    // let childrenList = parentList.children
+    // console.log(childrenList.length)
+    // if(childrenList.length>0){
+    //     n= childrenList.length
+    //     for(let i = 0; i<n; i++){
+    //     let parent = document.querySelector('.tiles')
+    //     let child = document.querySelector('.tile')
+    //     parent.removeChild(child)
+    //     }
+    // }
+    tileClicked=0
+    document.querySelector('.tile-view').classList.remove('selected')
+    let stringContact = localStorage.getItem('contact')
+    let contacts = JSON.parse(stringContact)
+
+    if(clicked===0){
+        view="list"
+    printInListView(contacts)
+    let parentList = document.querySelector('.tiles')
+    let childrenList = parentList.children
+    console.table(childrenList)
+    clicked++
+}else{
+    return false;
+}
+    document.querySelector('.contact-form').classList.add('hidden')
+    document.querySelector('.tiles').classList.remove('hidden')
+    document.querySelector(".addnew").classList.remove("hidden")
+
+})
+     
+
+
+
+   
+
+
+// Tile View
+
+document.querySelector('.tile-view').addEventListener('click',()=>{
+    document.querySelector('.tiles').innerHTML=''
+    // let parentList = document.querySelector('.tiles')
+    // let childrenList = parentList.children
+    // console.log(childrenList.length)
+    // if(childrenList.length>0){
+    //     n= childrenList.length
+    //     for(let i = 0; i<n; i++){
+    //     let parent = document.querySelector('.tiles')
+    //     let child = document.querySelector('.list')
+    //     parent.removeChild(child)
+    //     }
+    // }
+    clicked=0
+    document.querySelector('.list-view').classList.remove('selected')
+
+    let stringContact = localStorage.getItem('contact')
+    let contacts = JSON.parse(stringContact)
+    if(tileClicked===0){
+        view="tile"
+        printInTileView(contacts)
+        
+
     tileClicked++
     document.querySelector('.tile-view').classList.add('selected')
 }else{
@@ -194,9 +228,6 @@ document.querySelector(".addnew").addEventListener("click",()=>{
 
     document.querySelector('.tiles').innerHTML=''
 
-    // let parentList = document.querySelector('.tiles')
-    // let childrenList = parentList.children
-    // console.log(childrenList.length)
     // if(childrenList.length>0){
     //     n= childrenList.length
     //     for(let i = 0; i<n; i++){
@@ -231,7 +262,7 @@ document.querySelector(".addnew").addEventListener("click",()=>{
 })
 
 
-//Find Contacts Functionality
+// Find Contacts Functionality
 
 
 let filterInput = document.getElementById('findcontact');
@@ -246,11 +277,142 @@ function filterData(){
     let FilteredList;
     if(filterValue){
     FilteredList= data.filter(dataItem=>{
-       return (dataItem.FirstName.toLowerCase()+dataItem.LastName.toLowerCase()).includes(filterValue)
+       return (dataItem.FirstName.toLowerCase()+" "+dataItem.LastName.toLowerCase()).includes(filterValue)
     })}
-    else{
-        return ;
-    }
-    console.log(FilteredList)
-     
+    
+
+    if(view==="list"){
+       if(FilteredList){
+        printInListView(FilteredList)
+        }
+        else{
+            printInListView(data)
+        }
+   }
+    else if(view==="tile"){
+        if(FilteredList){
+            printInTileView(FilteredList)     
+        }else{
+       printInTileView(data)
+       }
 }
+else{
+    printInListView(FilteredList)
+}
+
+}
+
+
+//Sorting by FirstName
+
+document.getElementById('sortByFirst').addEventListener('click',()=>{
+    document.querySelector('.tiles').innerHTML=''
+    let stringContact = localStorage.getItem('contact')
+    let contacts = JSON.parse(stringContact)
+    contacts.sort(function(a,b){
+        if(a.FirstName.toLowerCase()<b.FirstName.toLowerCase())
+        return -1;
+        if(a.FirstName.toLowerCase()>b.FirstName.toLowerCase())
+        return 1;
+        return 0;
+    })
+    if(view==="list"){
+        clicked=0
+        printInListView(contacts)
+    }
+    else if(view==="tile"){
+        tileClicked=0
+        printInTileView(contacts)
+    }
+})
+
+//Sorting by LastName
+
+document.getElementById('sortByLast').addEventListener('click',()=>{
+    document.querySelector('.tiles').innerHTML=''
+    let stringContact = localStorage.getItem('contact')
+    let contacts = JSON.parse(stringContact)
+    contacts.sort(function(a,b){
+        if(a.LastName.toLowerCase()<b.LastName.toLowerCase())
+        return -1;
+        if(a.LastName.toLowerCase()>b.LastName.toLowerCase())
+        return 1;
+        return 0;
+    })
+    if(view==="list"){
+        clicked=0
+        printInListView(contacts)
+    }
+    else if(view==="tile"){
+        tileClicked=0
+        printInTileView(contacts)
+    }
+})
+
+
+//Sort by D.O.B
+
+document.getElementById('sortByDOB').addEventListener('click',()=>{
+    document.querySelector('.tiles').innerHTML=''
+    let stringContact = localStorage.getItem('contact')
+    let contacts = JSON.parse(stringContact)
+    contacts.sort((a,b)=>{
+        datef=new Date((a.birthday).toString());
+        dates=new Date(b.birthday.toString());
+        return datef - dates
+            })
+    if(view==="list"){
+        clicked=0
+        printInListView(contacts)
+    }
+    else if(view==="tile"){
+        tileClicked=0
+        printInTileView(contacts)
+    }
+})
+
+ 
+// Delete contacts
+
+    let delCont=document.getElementById('deleteCont')
+    delCont.addEventListener('click',(e)=>{
+        
+        let delInput= document.getElementById('deleteInput').value;
+        console.log(delInput);
+        let strOldData=localStorage.getItem('contact')
+        let oldData= JSON.parse(strOldData)
+       let modData= oldData.filter(data=>{
+           return !(((data.FirstName).toLowerCase())===(delInput.toLowerCase()))
+       })
+       console.log(modData)
+       if(view==="list"){
+        document.querySelector('.tiles').innerHTML=''
+        printInListView(modData)
+        }else if(view==="tile"){
+        document.querySelector('.tiles').innerHTML=''       
+        printInTileView(modData)
+        }else{
+            document.querySelector('.tiles').innerHTML=''
+        printInListView(modData)
+        }
+       localStorage.removeItem('contact')
+       let strModData= JSON.stringify(modData)
+       localStorage.setItem('contact',strModData)
+    })
+    
+    
+ 
+// //  if(deleteContact){
+// document.querySelector('delete-contact').addEventListener('click',()=>{
+    
+//         // let strOldData=localStorage.getItem('contact')
+//         // let oldData= JSON.parse(strOldData)
+//         // oldData.splice(index,1)
+//         // console.table(oldData)
+//         // let strModData= JSON.stringify(oldData)
+//         // localStorage.setItem('contact',strModData)
+//         localStorage.removeItem('contact')
+    
+    
+//  })
+  

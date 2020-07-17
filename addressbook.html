@@ -14,13 +14,24 @@
         <div class="container mt-5 pr-5 pl-5 ">
         <h1 style="color: #7e57c2;" class="h-6  text-center pt-3 mb-4"><i class="fa fa-address-book mr-3" aria-hidden="true"></i>Address Book</h1>
         <div class="search-box-container mb-3">
+        <div class="contactFinder">
         <div class="findbtn" id="findcontbtn"><i class="fa fa-search " aria-hidden="true"></i></div>
         <input class="findbox" type="text" id="findcontact" placeholder="Find Contact">
+        </div>
         <div class="view">
             <span class="list-view disabled ml-3"><i class="fa fa-list" aria-hidden="true"></i>
                 List-View</span>
             <span class="tile-view ml-2"><i class="fa fa-address-card" aria-hidden="true"></i>
             Tile-View</span>        
+        </div>
+        <div class="sort btn-group" >
+            <button id="sortByFirst" class="fnsort btn btn-outline-primary">FirstName</button>
+            <button id="sortByLast" class="lnsort btn btn-outline-success">LastName</button>
+            <button id="sortByDOB" class="DOBsort btn btn-outline-danger">D.O.B</button>
+        </div>
+        <div class="delContainer">
+            <input type="text" id="deleteInput" placeholder="Enter FirstName to delete"> 
+            <button id="deleteCont">Delete</button>
         </div>
         </div>
         <!-- <div class="card  mb-3 "> -->

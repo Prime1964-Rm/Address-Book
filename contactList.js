@@ -5,13 +5,15 @@
 
 // console.log(a)
 
-let contactData=[];
-let oldData = JSON.parse(localStorage.getItem('contact'));
-    contactData = oldData
-    console.log(contactData)
+
 const addContact = (e)=>{
-    
-    let firtname = document.getElementById('FirstName').value
+    let contactData=[];
+    let oldData = JSON.parse(localStorage.getItem('contact'));
+    if(oldData){
+        contactData = oldData;
+    }
+    console.log(contactData);
+    let firstname = document.getElementById('FirstName').value
     let lastname = document.getElementById('LastName').value
     let countrycode = document.getElementById('CountryCode').value
     let mob= document.getElementById('Mobile').value
@@ -23,11 +25,10 @@ const addContact = (e)=>{
     let date = document.getElementById('birthday').value
     let stringDate = date.toString()
 
-    var opacity = 0
-    var intervalID= 0;
+  
 
     let message = ""
-    if(firtname.length===0){
+    if(firstname.length===0){
         message='Firstname is required'
         e.preventDefault()
         errorElement.innerHTML= message
@@ -35,7 +36,7 @@ const addContact = (e)=>{
         // document.querySelector('.error').classList.add('fade')
         setTimeout(function(){document.querySelector(".error").classList.add("hidden")}, 4000)
     }
-    else if(firtname.length > 25){
+    else if(firstname.length > 25){
         message='Firstname can\'t be larger than 25 characters'
         e.preventDefault()
         errorElement.innerHTML = message
@@ -123,14 +124,16 @@ const addContact = (e)=>{
     e.preventDefault();
     
     if(message.length===0){
+        let id= Math.floor((Math.random() * 10000) + 1);
         let contact={
-            FirstName :  firtname,
+            FirstName :  firstname,
             LastName : lastname ,
             Mobile: mob,
             Email: email,
             ContactType: contactType,
             countrycode: countrycode,
-            birthday: date
+            birthday: date,
+            id: id
         }
         contactData.push(contact);
         let contactObjToString= JSON.stringify(contactData)
